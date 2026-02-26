@@ -1,0 +1,248 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "StyleSense – Generative AI Powered Fashion Recommendation System",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "summary": "Apply fashion-luxury visual theme across the entire site with pastel tones, elegant typography, smooth animations, and responsive layouts",
+      "acceptanceCriteria": [
+        "Pastel + black/white palette is applied consistently across all sections",
+        "Headings use an elegant serif or display font; body uses a clean sans-serif",
+        "Button and card hover effects animate smoothly (no jank)",
+        "Layout is fully responsive and renders correctly on mobile (≤768px) and desktop (≥1280px)"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/index.css",
+          "operation": "modify",
+          "description": "Add global CSS custom properties for fashion-luxury color palette (blush pink, lavender, cream, mint, black, white accents), import elegant serif font (e.g., Playfair Display) and clean sans-serif (e.g., Inter or Montserrat) from Google Fonts, define base typography styles with font-family assignments for headings vs body, add smooth transition utilities for hover effects, and ensure all base styles support responsive breakpoints"
+        },
+        {
+          "path": "frontend/tailwind.config.js",
+          "operation": "modify",
+          "description": "Extend Tailwind theme with custom color palette matching pastel + black/white luxury theme (blush, lavender, cream, mint, plus black/white), add font-family configurations for elegant serif headings and sans-serif body text, configure smooth transition timings and hover effect utilities, and ensure responsive breakpoints are properly defined for mobile (≤768px) and desktop (≥1280px)"
+        }
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "summary": "Build Hero section with generated banner image background, project title, tagline, and two CTA buttons that scroll to Demo section",
+      "acceptanceCriteria": [
+        "Hero section occupies full viewport height on desktop",
+        "Title, tagline, and both CTA buttons are visible and legible over the banner image",
+        "Clicking either CTA button scrolls smoothly to the Demo section"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/Hero.tsx",
+          "operation": "create",
+          "description": "Create Hero component with full-width background using generated hero banner image from frontend/public/assets/generated/hero-banner.dim_1920x1080.png, large stylish typography for 'StyleSense' title, tagline 'Your Personal AI Stylist Powered by Generative Intelligence', and two CTA buttons ('Get Started' as primary, 'Upload Your Style' as secondary) with smooth scroll-to-Demo section handlers using scrollIntoView, ensure full viewport height on desktop, apply text shadow or overlay for legibility over banner image, and style buttons with hover effects matching theme"
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Import and render Hero component at the top of the main page layout, ensure proper section structure for smooth scrolling between Hero and Demo sections"
+        }
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "summary": "Build About the Project section explaining StyleSense's generative AI fashion recommendation capabilities",
+      "acceptanceCriteria": [
+        "Section is clearly labeled 'About the Project'",
+        "Full description text is displayed with readable typography",
+        "Section is visually distinct from adjacent sections"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/About.tsx",
+          "operation": "create",
+          "description": "Create About component with section heading 'About the Project', styled content block displaying the full description text 'StyleSense is a Generative AI-powered fashion recommendation system that analyzes user preferences, uploaded images, body type, and fashion trends to generate personalized outfit suggestions, styling tips, and trend insights.', include the generated about illustration from frontend/public/assets/generated/about-illustration.dim_800x600.png positioned beside or above the text, apply readable typography matching theme, and ensure visual distinction with padding, background color, or borders"
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Import and render About component in the main page layout after the Hero section, ensure proper section spacing"
+        }
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "summary": "Build Features section with six feature cards showing AI fashion capabilities, each with icon and hover animations",
+      "acceptanceCriteria": [
+        "All six feature cards are displayed in a responsive grid (3 cols on desktop, 2 on tablet, 1 on mobile)",
+        "Each card has an icon and a short descriptive text",
+        "Cards animate or lift on hover"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/Features.tsx",
+          "operation": "create",
+          "description": "Create Features component with section heading 'Features', render six feature cards in a responsive grid (3 columns on desktop, 2 on tablet, 1 on mobile) for: (1) AI-based outfit recommendation, (2) Image-based style analysis, (3) Trend forecasting using AI, (4) Personalized wardrobe suggestions, (5) Occasion-based outfit generator, (6) Smart styling assistant chatbot. Each card includes a relevant icon (use lucide-react or heroicons) and short description text, apply smooth hover lift/scale animation with shadow effects matching the luxury theme, and ensure proper grid responsiveness with Tailwind or CSS Grid"
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Import and render Features component in the main page layout after the About section"
+        }
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "summary": "Build How It Works section showing four sequential steps with numbered indicators",
+      "acceptanceCriteria": [
+        "All four steps are displayed in order with visible step numbers or icons",
+        "Steps are laid out horizontally on desktop and vertically on mobile",
+        "Section heading clearly reads 'How It Works'"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/HowItWorks.tsx",
+          "operation": "create",
+          "description": "Create HowItWorks component with section heading 'How It Works', display four sequential steps with numbered indicators (1-4) and descriptive text: Step 1 – User uploads image or selects preferences; Step 2 – AI analyzes style, color, and trends; Step 3 – Generative AI creates outfit combinations; Step 4 – User receives personalized styling advice. Layout steps horizontally on desktop (flex row or grid) and vertically on mobile (flex column), style step numbers prominently with circular badges or large numerals, and ensure visual flow with connecting lines or arrows between steps on desktop"
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Import and render HowItWorks component in the main page layout after the Features section"
+        }
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "summary": "Build Demo section with image upload UI, style preference dropdown, generate button, and simulated AI outfit results",
+      "acceptanceCriteria": [
+        "Upload area renders as a styled dashed box with icon and instructional text",
+        "Dropdown contains at least 5 style preference options",
+        "'Generate Recommendation' button simulates a loading state (spinner or animation) before revealing outfit cards",
+        "At least 3 outfit cards appear after generation, each with an image, outfit name, and description",
+        "No real backend call is made; all logic is frontend simulation"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/Demo.tsx",
+          "operation": "create",
+          "description": "Create Demo component with section heading 'Try It Yourself' or 'Demo', implement image upload placeholder area as a styled dashed box with click-to-upload or drag-and-drop UI (no actual file processing, just visual state change on file selection), add style preference dropdown with at least 5 options (Casual, Formal, Streetwear, Bohemian, Minimalist), create 'Generate Recommendation' button that triggers frontend-only dummy AI logic with simulated loading state (spinner or progress animation for 1-2 seconds), and implement results area that displays 3 outfit cards using generated images from frontend/public/assets/generated/outfit-card-1.dim_600x800.png, frontend/public/assets/generated/outfit-card-2.dim_600x800.png, frontend/public/assets/generated/outfit-card-3.dim_600x800.png with sample outfit names and style descriptions. Use React state to manage upload, preferences, loading, and results display. No backend calls required—all logic is simulated client-side"
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Import and render Demo component with an id or ref attribute for scroll targeting (e.g., id='demo'), place it after the HowItWorks section so that Hero CTA buttons can scroll to it"
+        }
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "summary": "Build Technologies Used section displaying six technology badges",
+      "acceptanceCriteria": [
+        "All six technologies are displayed as visually distinct badges or cards",
+        "Section is labeled 'Technologies Used'",
+        "Responsive layout wraps badges on smaller screens"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/Technologies.tsx",
+          "operation": "create",
+          "description": "Create Technologies component with section heading 'Technologies Used', display six technology badges or chip cards for: Generative AI, Computer Vision, NLP, React / HTML / CSS / JavaScript, Python (Backend), Machine Learning Models. Style badges with rounded corners, subtle background colors, and elegant typography matching the luxury theme, ensure responsive layout wraps badges on smaller screens using flexbox or grid, and apply subtle hover effects on badges"
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Import and render Technologies component in the main page layout after the Demo section"
+        }
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "summary": "Build Testimonials section with 2–3 stylish user review cards with avatars, quotes, and star ratings",
+      "acceptanceCriteria": [
+        "2–3 testimonial cards are displayed",
+        "Each card contains a name, avatar, review quote, and star rating",
+        "Cards are horizontally arranged on desktop and stacked on mobile"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/Testimonials.tsx",
+          "operation": "create",
+          "description": "Create Testimonials component with section heading 'What Our Users Say' or 'Testimonials', display 2–3 user review cards each containing a circular avatar placeholder (use placeholder avatar images or initials), user name, short fashion-related quote (e.g., 'StyleSense transformed my wardrobe!' or 'The AI recommendations are spot-on!'), and star rating (5 stars displayed as icons or Unicode stars). Apply magazine-style polished aesthetic with subtle shadows and elegant card borders, arrange cards horizontally on desktop and stack vertically on mobile, and ensure cards have consistent padding and spacing"
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Import and render Testimonials component in the main page layout after the Technologies section"
+        }
+      ]
+    },
+    {
+      "id": "REQ-9",
+      "summary": "Build Footer with contact info, social media icons, copyright text, and 'Powered by AI' badge",
+      "acceptanceCriteria": [
+        "Footer displays contact info, social icons, copyright text, and 'Powered by AI' label",
+        "Social icons are clickable (href='#' placeholders acceptable)",
+        "Footer is responsive and readable on mobile"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/Footer.tsx",
+          "operation": "create",
+          "description": "Create Footer component containing: contact information section with email and phone placeholders (e.g., contact@stylesense.ai, +1-555-STYLE), social media icon links for Instagram, Twitter/X, Pinterest, LinkedIn (use lucide-react or heroicons, href='#' placeholders), copyright text '© 2024 StyleSense. All rights reserved.', and a 'Powered by AI' badge or label. Apply luxury theme styling with appropriate background color, ensure responsive layout that stacks elements vertically on mobile, and make social icons clickable with hover effects"
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Import and render Footer component at the bottom of the main page layout after all other sections"
+        }
+      ]
+    },
+    {
+      "id": "REQ-10",
+      "summary": "Add floating 'Ask StyleSense' AI assistant popup with simulated chat responses",
+      "acceptanceCriteria": [
+        "A floating button is always visible in the bottom-right corner of the screen",
+        "Clicking the button opens a chat panel with a greeting message from StyleSense AI",
+        "User can type a message and receive a canned/dummy fashion-related response",
+        "Panel can be closed by clicking the button again or a close icon",
+        "Popup does not obscure critical content and is mobile-friendly"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/AIChatAssistant.tsx",
+          "operation": "create",
+          "description": "Create AIChatAssistant component as a floating circular button fixed to the bottom-right corner with an AI/chat icon (use lucide-react MessageCircle or similar). On click, toggle open a compact chat panel positioned above the button, displaying a greeting message ('Hi! I'm StyleSense AI. Ask me anything about fashion!'). Implement chat UI with message list, input field, and send button. Use React state to manage open/closed state and message history. Simulate AI responses with predefined dummy fashion-related responses (e.g., if user asks about outfits, respond with 'Try pairing a cream blazer with tailored trousers!' or similar canned responses based on keywords). Include close button or allow clicking the floating button again to close the panel. Ensure mobile-friendly layout with proper z-index so it doesn't obscure critical content, and apply smooth open/close animations matching the luxury theme"
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Import and render AIChatAssistant component at the root level of the main page layout so it is always visible and accessible across all sections"
+        }
+      ]
+    },
+    {
+      "id": "REQ-11",
+      "summary": "Render all generated images as static assets from frontend/public/assets/generated in their respective sections",
+      "acceptanceCriteria": [
+        "All generated images load correctly from frontend/public/assets/generated",
+        "Hero banner image displays as a full-width background",
+        "Outfit card images and section illustrations render at appropriate sizes"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/Hero.tsx",
+          "operation": "modify",
+          "description": "Ensure Hero component references the generated hero banner image from frontend/public/assets/generated/hero-banner.dim_1920x1080.png as a full-width background using CSS background-image or an img element with object-fit cover, verify image loads correctly and covers the full viewport"
+        },
+        {
+          "path": "frontend/src/components/About.tsx",
+          "operation": "modify",
+          "description": "Ensure About component references the generated about illustration from frontend/public/assets/generated/about-illustration.dim_800x600.png, verify image loads correctly and is positioned appropriately within the content block"
+        },
+        {
+          "path": "frontend/src/components/Demo.tsx",
+          "operation": "modify",
+          "description": "Ensure Demo component references the three generated outfit card images from frontend/public/assets/generated/outfit-card-1.dim_600x800.png, frontend/public/assets/generated/outfit-card-2.dim_600x800.png, and frontend/public/assets/generated/outfit-card-3.dim_600x800.png in the results area, verify all images load correctly and render at appropriate sizes within the outfit cards"
+        }
+      ]
+    }
+  ]
+}
